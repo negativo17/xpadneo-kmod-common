@@ -1,6 +1,6 @@
 Name:           xpadneo-kmod-common
 Version:        0.9.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Advanced Linux Driver for Xbox One Wireless Gamepad common files
 License:        GPLv3
 URL:            https://atar-axis.github.io/xpadneo
@@ -25,16 +25,21 @@ Advanced Linux Driver for Xbox One Wireless Gamepad common files.
 mkdir -p %{buildroot}%{_udevrulesdir}
 mkdir -p %{buildroot}%{_prefix}/lib/modprobe.d/
 
-# Aliase:
+# Aliases:
 install -p -m 0644 hid-xpadneo/etc-modprobe.d/xpadneo.conf %{buildroot}%{_prefix}/lib/modprobe.d/
 
 # UDev rules:
 install -p -m 644 hid-xpadneo/etc-udev-rules.d/60-xpadneo.rules %{buildroot}%{_udevrulesdir}/
 
 %files
+%license LICENSE
+%doc NEWS.md docs/*.md
 %{_prefix}/lib/modprobe.d/xpadneo.conf
 %{_udevrulesdir}/60-xpadneo.rules
 
 %changelog
+* Mon Aug 16 2021 Simone Caronni <negativo17@gmail.com> - 0.9.1-2
+- Add docs.
+
 * Mon Aug 16 2021 Simone Caronni <negativo17@gmail.com> - 0.9.1-1
 - First build.
