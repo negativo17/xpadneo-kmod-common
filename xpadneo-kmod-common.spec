@@ -1,43 +1,61 @@
-Name:           xpadneo-kmod-common
+%global commit0 4fd620cd6cb80fb0c1490dc1c864108679d91ab1
+%global date 20220306
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+#global tag %{version}
+
+%global real_name xpadneo
+
+Name:           %{real_name}-kmod-common
 Version:        0.9.1
-Release:        2%{?dist}
+Release:        3%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        Advanced Linux Driver for Xbox One Wireless Gamepad common files
 License:        GPLv3
-URL:            https://atar-axis.github.io/xpadneo
+URL:            https://atar-axis.github.io/%{real_name}
 
 BuildArch:      noarch
 
-Source0:        https://github.com/atar-axis/xpadneo/archive/refs/tags/v%{version}.tar.gz#/xpadneo-%{version}.tar.gz
+%if 0%{?tag:1}
+Source0:    https://github.com/atar-axis/%{real_name}/archive/v%{version}.tar.gz#/%{real_name}-%{version}.tar.gz
+%else
+Source0:    https://github.com/atar-axis/%{real_name}/archive/%{commit0}.tar.gz#/%{real_name}-%{shortcommit0}.tar.gz
+%endif
 
 # UDev rule location (_udevrulesdir) and systemd macros:
 BuildRequires:  systemd-rpm-macros
 
-Requires:       xpadneo-kmod = %{?epoch:%{epoch}:}%{version}
-Provides:       xpadneo-kmod-common = %{?epoch:%{epoch}:}%{version}
+Requires:       %{real_name}-kmod = %{?epoch:%{epoch}:}%{version}
+Provides:       %{real_name}-kmod-common = %{?epoch:%{epoch}:}%{version}
 
 %description
 Advanced Linux Driver for Xbox One Wireless Gamepad common files.
  
 %prep
-%autosetup -p0 -n xpadneo-%{version}
+%if 0%{?tag:1}
+%autosetup -p1 -n %{real_name}-%{version}
+%else
+%autosetup -p1 -n %{real_name}-%{commit0}
+%endif
 
 %install
 mkdir -p %{buildroot}%{_udevrulesdir}
 mkdir -p %{buildroot}%{_prefix}/lib/modprobe.d/
 
 # Aliases:
-install -p -m 0644 hid-xpadneo/etc-modprobe.d/xpadneo.conf %{buildroot}%{_prefix}/lib/modprobe.d/
+install -p -m 0644 hid-%{real_name}/etc-modprobe.d/%{real_name}.conf %{buildroot}%{_prefix}/lib/modprobe.d/
 
 # UDev rules:
-install -p -m 644 hid-xpadneo/etc-udev-rules.d/60-xpadneo.rules %{buildroot}%{_udevrulesdir}/
+install -p -m 644 hid-%{real_name}/etc-udev-rules.d/60-%{real_name}.rules %{buildroot}%{_udevrulesdir}/
 
 %files
 %license LICENSE
 %doc NEWS.md docs/*.md
-%{_prefix}/lib/modprobe.d/xpadneo.conf
-%{_udevrulesdir}/60-xpadneo.rules
+%{_prefix}/lib/modprobe.d/%{real_name}.conf
+%{_udevrulesdir}/60-%{real_name}.rules
 
 %changelog
+* Sun Mar 20 2022 Simone Caronni <negativo17@gmail.com> - 0.9.1-3.20220306git4fd620c
+- Update to latest snapshot, adds support for BLE firmware.
+
 * Mon Aug 16 2021 Simone Caronni <negativo17@gmail.com> - 0.9.1-2
 - Add docs.
 
