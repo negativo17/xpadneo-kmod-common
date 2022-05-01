@@ -1,5 +1,5 @@
-%global commit0 4fd620cd6cb80fb0c1490dc1c864108679d91ab1
-%global date 20220306
+%global commit0 74ea7c1488f9ccebf3ed6d9aea1319cacb08c625
+%global date 20220430
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 #global tag %{version}
 
@@ -7,7 +7,7 @@
 
 Name:           %{real_name}-kmod-common
 Version:        0.9.1
-Release:        3%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
+Release:        4%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        Advanced Linux Driver for Xbox One Wireless Gamepad common files
 License:        GPLv3
 URL:            https://atar-axis.github.io/%{real_name}
@@ -53,6 +53,9 @@ install -p -m 644 hid-%{real_name}/etc-udev-rules.d/60-%{real_name}.rules %{buil
 %{_udevrulesdir}/60-%{real_name}.rules
 
 %changelog
+* Sun May 01 2022 Simone Caronni <negativo17@gmail.com> - 0.9.1-4.20220430git74ea7c1
+- Update to latest snapshot, supports firmware 5.13.
+
 * Sun Mar 20 2022 Simone Caronni <negativo17@gmail.com> - 0.9.1-3.20220306git4fd620c
 - Update to latest snapshot, adds support for BLE firmware.
 
