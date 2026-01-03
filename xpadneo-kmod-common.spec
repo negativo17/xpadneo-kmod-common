@@ -1,13 +1,13 @@
 %global commit0 a16acb03e7be191d47ebfbc8ca1d5223422dac3e
 %global date 20250705
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-#global tag %{version}
+%global tag %{version}
 
 %global real_name xpadneo
 
 Name:           %{real_name}-kmod-common
-Version:        0.9.7%{!?tag:^%{date}git%{shortcommit0}}
-Release:        2%{?dist}
+Version:        0.9.8%{!?tag:^%{date}git%{shortcommit0}}
+Release:        3%{?dist}
 Summary:        Advanced Linux Driver for Xbox One Wireless Gamepad common files
 License:        GPLv3
 URL:            https://atar-axis.github.io/%{real_name}
@@ -54,6 +54,9 @@ install -p -m 644 hid-%{real_name}/etc-udev-rules.d/*.rules %{buildroot}%{_udevr
 %{_udevrulesdir}/70-%{real_name}-disable-hidraw.rules
 
 %changelog
+* Sat Jan 03 2026 Simone Caronni <negativo17@gmail.com> - 0.9.8-3
+- Update to 0.9.8.
+
 * Fri Aug 01 2025 Simone Caronni <negativo17@gmail.com> - 0.9.7^20250705gita16acb0-2
 - Update to latest snapshot.
 
