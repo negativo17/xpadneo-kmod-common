@@ -47,8 +47,8 @@ install -p -m 0644 hid-%{real_name}/etc-modprobe.d/%{real_name}.conf %{buildroot
 install -p -m 644 hid-%{real_name}/etc-udev-rules.d/*.rules %{buildroot}%{_udevrulesdir}/
 
 %files
-%license LICENSE
-%doc docs/*.md
+%license LICENSE.md LICENSES
+%doc docs/*.md NEWS.md CONTRIBUTING.md
 %{_prefix}/lib/modprobe.d/%{real_name}.conf
 %{_udevrulesdir}/60-%{real_name}.rules
 %{_udevrulesdir}/70-%{real_name}-disable-hidraw.rules
