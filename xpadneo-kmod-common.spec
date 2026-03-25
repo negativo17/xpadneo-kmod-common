@@ -1,12 +1,7 @@
-%global commit0 a16acb03e7be191d47ebfbc8ca1d5223422dac3e
-%global date 20250705
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global tag %{version}
-
 %global real_name xpadneo
 
 Name:           %{real_name}-kmod-common
-Version:        0.10%{!?tag:^%{date}git%{shortcommit0}}
+Version:        0.10.1
 Release:        1%{?dist}
 Summary:        Advanced Linux Driver for Xbox One Wireless Gamepad common files
 License:        GPL-3.0-or-later
@@ -14,11 +9,7 @@ URL:            https://atar-axis.github.io/%{real_name}
 
 BuildArch:      noarch
 
-%if 0%{?tag:1}
 Source0:    https://github.com/atar-axis/%{real_name}/archive/v%{version}.tar.gz#/%{real_name}-%{version}.tar.gz
-%else
-Source0:    https://github.com/atar-axis/%{real_name}/archive/%{commit0}.tar.gz#/%{real_name}-%{shortcommit0}.tar.gz
-%endif
 
 # UDev rule location (_udevrulesdir) and systemd macros:
 BuildRequires:  systemd-rpm-macros
@@ -30,11 +21,7 @@ Provides:       %{real_name}-kmod-common = %{?epoch:%{epoch}:}%{version}
 Advanced Linux Driver for Xbox One Wireless Gamepad common files.
  
 %prep
-%if 0%{?tag:1}
 %autosetup -p1 -n %{real_name}-%{version}
-%else
-%autosetup -p1 -n %{real_name}-%{commit0}
-%endif
 
 %install
 mkdir -p %{buildroot}%{_udevrulesdir}
@@ -54,6 +41,9 @@ install -p -m 644 hid-%{real_name}/etc-udev-rules.d/*.rules %{buildroot}%{_udevr
 %{_udevrulesdir}/70-%{real_name}-disable-hidraw.rules
 
 %changelog
+* Wed Mar 25 2026 Simone Caronni <negativo17@gmail.com> - 0.10.1-1
+- Update to 0.10.1.
+
 * Sun Mar 08 2026 Simone Caronni <negativo17@gmail.com> - 0.10-1
 - Update to 0.10.
 
