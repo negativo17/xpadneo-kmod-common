@@ -1,7 +1,7 @@
 %global real_name xpadneo
 
 Name:           %{real_name}-kmod-common
-Version:        0.10.4
+Version:        0.10.5
 Release:        1%{?dist}
 Summary:        Advanced Linux Driver for Xbox One Wireless Gamepad common files
 License:        GPL-3.0-or-later
@@ -41,6 +41,9 @@ install -p -m 644 hid-%{real_name}/etc-udev-rules.d/*.rules %{buildroot}%{_udevr
 %{_udevrulesdir}/70-%{real_name}-disable-hidraw.rules
 
 %changelog
+* Tue Oct 20 2026 Simone Caronni <negativo17@gmail.com> - 0.10.5-1
+- Update to 0.10.5.
+
 * Mon Jul 13 2026 Simone Caronni <negativo17@gmail.com> - 0.10.4-1
 - Update to 0.10.4.
 
